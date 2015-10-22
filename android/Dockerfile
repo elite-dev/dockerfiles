@@ -11,6 +11,9 @@ FROM debian:wheezy
 MAINTAINER Sosuke Masui "masui@uphyca.com"
 
 
+ENV DEBIAN_FRONTEND noninteractive
+
+
 # Install Oracle Java8.
 # http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
 # https://developer.android.com/intl/ja/sdk/installing/index.html?pkg=tools#UbuntuTrouble
@@ -53,3 +56,6 @@ ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 # Install Android packages.
 ENV ANDROID_SDK_COMPONENTS platform-tools,build-tools-23.0.1,android-23,extra-android-m2repository,extra-google-m2repository
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_SDK_COMPONENTS}"
+
+
+ENV DEBIAN_FRONTEND dialog
