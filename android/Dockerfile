@@ -11,17 +11,21 @@ FROM debian:wheezy
 MAINTAINER Sosuke Masui "masui@uphyca.com"
 
 
+ENV DEBIAN_FRONTEND noninteractive
+
+
 # Install Oracle Java8.
 # http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
 # https://developer.android.com/intl/ja/sdk/installing/index.html?pkg=tools#UbuntuTrouble
-ENV JAVA_DEPENDENCIES "libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386"
+# http://stackoverflow.com/questions/2710499/android-sdk-on-a-64-bit-linux-machine
+ENV ANDROID_SDK_DEPENDENCIES "libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 ia32-libs"
 RUN	echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
 	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
 	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
 	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
 	dpkg --add-architecture i386 && \
 	apt-get update -y && \
-	apt-get install  -y --force-yes --no-install-recommends $JAVA_DEPENDENCIES oracle-java8-installer oracle-java8-set-default && \
+	apt-get install  -y --force-yes --no-install-recommends $ANDROID_SDK_DEPENDENCIES oracle-java8-installer oracle-java8-set-default && \
 	apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* /var/cache/oracle-jdk8-installer
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
@@ -52,3 +56,6 @@ ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 # Install Android packages.
 ENV ANDROID_SDK_COMPONENTS platform-tools,build-tools-23.0.1,android-23,extra-android-m2repository,extra-google-m2repository
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_SDK_COMPONENTS}"
+
+
+ENV DEBIAN_FRONTEND dialog
