@@ -19,7 +19,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # https://developer.android.com/intl/ja/sdk/installing/index.html?pkg=tools#UbuntuTrouble
 # http://stackoverflow.com/questions/2710499/android-sdk-on-a-64-bit-linux-machine
 ENV ANDROID_SDK_DEPENDENCIES="libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 ia32-libs" \
-	JAVA_PACKAGE_VERSION=8u60+8u60arm-1~webupd8~1
+	JAVA_PACKAGE_VERSION=8u66+8u65arm-1~webupd8~1
 RUN	echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
 	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
 	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
