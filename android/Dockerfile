@@ -43,19 +43,20 @@ ENV GRADLE_HOME=/usr/lib/gradle/2.10/ \
 
 # Install Android SDK.
 ENV ANDROID_SDK_URL=http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz \
-	ANDROID_HOME=/usr/local/android-sdk-linux \
-	ANDROID_SDK=/usr/local/android-sdk-linux
+	ANDROID_HOME=/opt/android-sdk-linux \
+	ANDROID_SDK=/opt/android-sdk-linux
 RUN apt-get update -y && \
-	apt-get install -y --force-yes --no-install-recommends curl && \
-	curl -L ${ANDROID_SDK_URL} | tar --no-same-owner -xz -C /usr/local && \
+	apt-get install -y --force-yes --no-install-recommends curl expect && \
+	curl -L ${ANDROID_SDK_URL} | tar --no-same-owner -xz -C /opt && \
 	apt-get autoremove -y --purge curl && \
 	apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 
 
 # Install Android packages.
-ENV ANDROID_SDK_COMPONENTS platform-tools,build-tools-23.0.2,android-23,extra-android-m2repository,extra-google-m2repository
-RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_SDK_COMPONENTS}"
+COPY tools /opt/tools
+ENV PATH ${PATH}:/opt/tools
+RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --all --filter platform-tools,build-tools-23.0.2,android-23,extra-android-m2repository,extra-google-m2repository"]
 
 
 ENV DEBIAN_FRONTEND dialog
