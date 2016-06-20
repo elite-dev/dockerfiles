@@ -35,9 +35,9 @@ RUN echo "deb http://ppa.launchpad.net/cwchien/gradle/ubuntu trusty main" | tee 
 	echo "deb-src http://ppa.launchpad.net/cwchien/gradle/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/cwchien-gradle.list && \
 	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
 	apt-get update -y && \
-	apt-get install  -y --force-yes --no-install-recommends gradle-2.10 && \
+	apt-get install  -y --force-yes --no-install-recommends gradle-2.14 && \
 	apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-ENV GRADLE_HOME=/usr/lib/gradle/2.10/ \
+ENV GRADLE_HOME=/usr/lib/gradle/2.14/ \
 	TERM=dumb
 
 
