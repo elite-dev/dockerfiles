@@ -35,9 +35,9 @@ RUN echo "deb http://ppa.launchpad.net/cwchien/gradle/ubuntu trusty main" | tee 
 	echo "deb-src http://ppa.launchpad.net/cwchien/gradle/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/cwchien-gradle.list && \
 	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
 	apt-get update -y && \
-	apt-get install  -y --force-yes --no-install-recommends gradle-2.10 && \
+	apt-get install  -y --force-yes --no-install-recommends gradle-2.14 && \
 	apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-ENV GRADLE_HOME=/usr/lib/gradle/2.10/ \
+ENV GRADLE_HOME=/usr/lib/gradle/2.14/ \
 	TERM=dumb
 
 
@@ -56,7 +56,7 @@ ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 # Install Android packages.
 COPY tools /opt/tools
 ENV PATH ${PATH}:/opt/tools
-RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --all --filter platform-tools,build-tools-23.0.2,android-23,extra-android-m2repository,extra-google-m2repository"]
+RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --no-ui --all --filter platform-tools,build-tools-24.0.0,build-tools-23.0.2,android-24,android-23,extra-android-m2repository,extra-google-m2repository"]
 
 
 ENV DEBIAN_FRONTEND dialog
