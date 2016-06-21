@@ -5,7 +5,7 @@
 #
 
 # Pull small base image.
-FROM debian:wheezy
+FROM debian:jessie
 
 
 MAINTAINER Sosuke Masui "masui@uphyca.com"
@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
 # https://developer.android.com/intl/ja/sdk/installing/index.html?pkg=tools#UbuntuTrouble
 # http://stackoverflow.com/questions/2710499/android-sdk-on-a-64-bit-linux-machine
-ENV ANDROID_SDK_DEPENDENCIES "libc6:i386 libstdc++6:i386 zlib1g:i386 libncurses5:i386 ia32-libs"
+ENV ANDROID_SDK_DEPENDENCIES "libc6 libstdc++6 zlib1g libncurses5"
 RUN	echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
 	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
 	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
