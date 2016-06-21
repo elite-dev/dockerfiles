@@ -4,7 +4,6 @@
 # https://github.com/uphyca/dockerfiles/android
 #
 
-# Pull small base image.
 FROM debian:jessie
 
 
