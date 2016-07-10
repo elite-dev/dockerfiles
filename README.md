@@ -1,3 +1,7 @@
-# dockerfiles
+# Android Dockerfile
 
-This is the Git repo of the Docker images on dockerhub under [uPhyca](https://hub.docker.com/r/uphyca/).
+
+- OpenJDK 8
+- Android SDK 24.4.1
+- Android Build Tools 24.0.0, 23.0.2
+- Gradle 2.10
