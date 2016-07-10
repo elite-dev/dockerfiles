@@ -5,7 +5,7 @@
 #
 # Pull small base image.
 
-FROM uphyca/android
+FROM debian:jessie
 
 MAINTAINER Trevor Boyer "trevor.boyer@elite-dev.com"
 
